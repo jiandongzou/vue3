@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<title>PDFH5</title>
+	<link rel="stylesheet" href="./css/style.css" />
+	<link rel="stylesheet" href="./css/pdfh5.css" />
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		html,
+		body {
+			width: 100%;
+			height: 100%;
+		}
+
+		#download {
+			display: none;
+			position: fixed;
+			right: 10px;
+			bottom: 30px;
+		}
+
+		#download img {
+			width: 63px;
+			height: 63x;
+
+
+		}
+	</style>
+</head>
+
+<body>
+	<div id="viwer">
+	</div>
+	<a  id="download" >
+		<img src="./images/download.png" alt="" srcset="">
+
+	</a>
+	<script src="./js/pdf.js"></script>
+	<script src="./js/pdf.worker.js"></script>
+	<script src="./js/jquery-3.6.0.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="./js/pdfh5.js" charset="utf-8"></script>
+	<script src="./js/download.min.js" charset="utf-8"></script>
+	<script type="text/javascript">
+		var pdfh5;
+		$(function () {
+			var pdfUrl = decodeURI(getQueryVariable("file"));
+			var fileName =decodeURI(getQueryVariable("fileName")) ;
+
+			document.title = decodeURI(fileName);
+			var sourceUrl = decodeURI(getQueryVariable("sourceUrl"));
+			$("#download").show();
+			if(isStatus){
+				$("#download").on("click",function(){
+				
+			       download(sourceUrl);
+				});
+			}else{
+				$("#download").attr("href",sourceUrl).attr("download",sourceUrl);
+			}
+			//
+			
+			pdfh5 = new Pdfh5('#viwer', {
+				pdfurl: pdfUrl,
+				URIenable: true,
+				// goto: 0,
+				lazy: true,
+				scrollEnable: true,// 是否允许pdf滚动
+				zoomEnable: pdfUrl, // 是否允许pdf手势缩放
+				// limit: 3
+			});
+
+		});
+      var isStatus=isPc()
+
+		function isPc(){
+            var ua = navigator.userAgent.toLowerCase();
+            var mobile = /mobile/gi.test(ua);
+            isPC = !mobile;
+            if(isPC){
+               return true
+            }
+            else
+            {
+              return false
+            }
+        }
+		
+		function getQueryVariable(variable) {
+			var query = window.location.search.substring(1);
+			var vars = query.split("&");
+			for (var i = 0; i < vars.length; i++) {
+				var pair = vars[i].split("=");
+				if (pair[0] == variable) { return pair[1]; }
+			}
+			return (false);
+		}
+	</script>
+</body>
+
+</html>

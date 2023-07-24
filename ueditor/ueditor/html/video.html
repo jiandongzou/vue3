@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>视频</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        body {
+            overflow-y: hidden;
+        }
+
+        iframe {
+            border: none;
+            background-color: transparent;
+        }
+
+        video {
+            object-fit: cover;
+        }
+
+        video::-internal-media-controls-download-button {
+            display: none;
+        }
+
+        /* video::-webkit-media-controls-enclosure {
+            overflow: hidden;
+        }
+
+        video::-webkit-media-controls-panel {
+            width: calc(100% + 30px);
+        } */
+    </style>
+</head>
+
+<body>
+    <div id="player">
+
+    </div>
+    <!-- <video src="" controls  class="videoName" id="video" width="100%" style="width: 100%; height:100%; object-fit: fill" controlslist="nodownload "  
+  ></video> -->
+
+</body>
+<script src='//player.polyv.net/resp/vod-player/latest/player.js'></script>
+<script src="//lib.baomitu.com/jquery/3.6.0/jquery.js"></script>
+<!-- <script src="//cdn.bootcss.com/vConsole/3.3.0/vconsole.min.js"></script> -->
+<script>
+    $(document).ready(function () {
+        // let url = window.location.host;
+        // var index = url.indexOf('.');
+        // document.domain = url.substring(index + 1, url.length);
+        var fileUrl = getQueryVariable('fileUrl')//$(window.frameElement).attr("fileUrl");
+        var isStatus = isPc();
+        var playerVideo = polyvPlayer({
+            wrap: "#player",
+            'width':'100%',
+            autoplay:false,
+            height:isStatus ? "" : "200",
+            'vid': fileUrl,
+        })
+        playerVideo.on('s2j_onPlayerInitOver', (...params) => {
+            if (isStatus) {
+                //$(window.frameElement).height($("#player").height());
+                window.parent.postMessage({ height: $("#player").height() }, '*');
+            } else {
+                //$(window.frameElement).height(200); 
+                window.parent.postMessage({ height: 200 }, '*');
+            }
+        });
+
+    })
+    window.onFullPageScreen = function (vid, currentStatus) {
+        alert(vid);
+       alert(currentStatus);
+
+    };
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) { return pair[1]; }
+        }
+        return (false);
+    }
+    function isPc() {
+        var ua = navigator.userAgent.toLowerCase();
+        var mobile = /mobile/gi.test(ua);
+        isPC = !mobile;
+        if (isPC) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+</script>
+
+</html>

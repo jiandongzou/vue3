@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>附件</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .filebox {
+            max-width: 670px;
+            background-color: #fcfcfc;
+            margin: 0px auto;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 0 5px #ccc;
+        }
+
+        .file {
+            height: 70px;
+            display: flex;
+            padding: 10px 0;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .boximg {
+
+            width: 22%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .boximg img {
+            width: 45px;
+        }
+
+        .fileinfo {
+            width: 73%;
+        }
+
+        .fileinfo .title {
+            margin-right: 15px;
+            font-size: 15px;
+            color: #000;
+            margin-bottom: 6px;
+            word-break: break-all;
+
+            text-overflow: ellipsis;
+
+            display: -webkit-box;
+
+            -webkit-box-orient: vertical;
+
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .fileinfo .size {
+
+            font-size: 13px;
+            color: #9b9b9b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="filebox">
+        <a class="fileHref" href="" target="_blank">
+            <div class="file">
+                <div class="boximg">
+                    <img src="/testUeditor/ueditor/themes/default/images/file_doc@2x.png" alt="" class="imgType">
+                </div>
+                <div class="fileinfo">
+                    <div class="title"> 新建 XLS 工作表</div>
+                    <div class="size"> 18.5 KB </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</body>
+<script src="//lib.baomitu.com/jquery/3.6.0/jquery.js"></script>
+<script>
+    window.addEventListener('message', function (e) {
+        console.log(e);
+    });
+    // let url=window.location.host;
+    // var index=url.indexOf('.');
+    // document.domain =url.substring(index+1,url.length);
+    // console.log($(window.frameElement));
+    var fileName = getQueryVariable("fileName");//$(window.frameElement).attr("fileName");
+
+    var fileType = getFileType(fileName);
+    if (fileType == "doc" || fileType == "docx" || fileType == "wps") {
+        $(".imgType").attr("src", "/resource/gdxz_ueditor/themes/default/images/file_doc@2x.png")
+    } else if (fileType == "xls" || fileType == "xlsx") {
+        $(".imgType").attr("src", "/resource/gdxz_ueditor/themes/default/images/file_xls@2x.png")
+    } else if (fileType == "pdf") {
+        $(".imgType").attr("src", "/resource/gdxz_ueditor/themes/default/images/file_pdf@2x.png")
+    } else if (fileType == "ppt" || fileType == "pptx") {
+        $(".imgType").attr("src", "/resource/gdxz_ueditor/themes/default/images/file_ppt@2x.png")
+    }
+    $('.title')[0].innerHTML = decodeURI(fileName);
+    var fileSize = getQueryVariable("fileSize") || 200   //$(window.frameElement).attr("fileSize") || 200;
+    var sourceUrl = getQueryVariable("sourceUrl")  //$(window.frameElement).attr("sourceUrl");
+    $('.size')[0].innerHTML = formatSize(fileSize, 1);
+    var fileUrl = getQueryVariable("fileUrl");
+    var currentHost = window.location.host;
+    var path = '';
+    if (currentHost.indexOf(".igandan.org") != -1) {
+        path = 'http://tmanager.igandan.org'
+    } else {
+        path = 'http://manager.igandan.com'
+    }
+    $(".fileHref").attr("href", path + "/resource/gdxz_ueditor/viwer/viewDetail.html?file=" + fileUrl + '&fileName=' + fileName + "&sourceUrl=" + sourceUrl)
+    // $(".fileHref").on("click", function () {
+    //     var fileUrl= getQueryVariable("fileUrl");
+    //     top.open("http://tmanager.igandan.org/testUeditor/viewDetail.html?file=" + fileUrl+'&fileName='+fileName+"&sourceUrl="+sourceUrl)
+    //     //top.location.href = "http://tmanager.igandan.org/testUeditor/viewDetail.html?file=" + $(window.frameElement).attr("fileUrl");
+    // });
+    function getFileType(val) {
+        return val.substring(val.lastIndexOf(".") + 1);
+    };
+    function formatSize(size, pointLength, units) {
+        var unit;
+        units = units || ['B', 'K', 'M', 'G'];
+        while ((unit = units.shift()) && size > 1024) {
+            size = size / 1024;
+        }
+        return (unit === 'B' ? size : size.toFixed(pointLength === undefined ? 2 : pointLength)) + unit;
+    }
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) { return pair[1]; }
+        }
+        return (false);
+    }
+</script>
+
+</html>

@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3777077 */
+  src: url('iconfont.woff2?t=1668671732046') format('woff2'),
+       url('iconfont.woff?t=1668671732046') format('woff'),
+       url('iconfont.ttf?t=1668671732046') format('truetype');
+}
+
+.edui-default .edui-for-insertaudio .edui-icon, .edui-default .edui-for-snapscreen .edui-icon,.edui-default .edui-for-drafts .edui-icon{
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.edui-default .edui-for-insertaudio .edui-icon:before {
+  content: "\e66d";
+}
+
+.edui-default .edui-for-drafts .edui-icon:before {
+  content: "\e698";
+}
+
+.edui-default .edui-for-snapscreen .edui-icon:before {
+  content: "\e795";
+}
+
