@@ -1,4 +1,4 @@
-import {connect,useSelector} from "react-redux"
+import {connect} from "react-redux"
 import {increment,Asyncincrement} from "../redux/action/count_action"
 import React, { Component } from 'react'
 console.log(increment)
