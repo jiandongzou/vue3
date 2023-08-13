@@ -8,7 +8,6 @@ import { login } from '@/api/login'
 import { useMessage } from '@/hooks/message'
 import { setName, setPermissions, setToken,clearInfo } from '@/redux/modules/user/action'
 const LoginForm= (props) => {
-    console.log(props);
     const { setToken, setName, clearInfo, setPermissions } = props
     
     const { uesErrorMsg, uesSuccessMsg } = useMessage()
@@ -18,7 +17,7 @@ const LoginForm= (props) => {
     const onFinish = async (values) => {
         console.log(values)
         try {
-           
+           alert("111")
              clearInfo()
             setLoading(true)
             const { data,code } = await login(values)

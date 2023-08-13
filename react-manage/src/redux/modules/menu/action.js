@@ -3,6 +3,7 @@ const menuAction=(data)=>({type:"SET_MENU",menuList:data})
 
 const asyncMenuAction= ()=> async(dispatch)=>{
     const {data,code}=await getMenuList();
+    console.log(data)
     dispatch(menuAction(data))
    
 }

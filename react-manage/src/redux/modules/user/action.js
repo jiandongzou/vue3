@@ -7,7 +7,7 @@ export const setToken=(token)=>({
     token
 });
 export const setPermissions=(permissions)=>({
-    type:"PERMISSIONS",
+    type:"SET_PERMISSIONS",
     permissions
 });
 

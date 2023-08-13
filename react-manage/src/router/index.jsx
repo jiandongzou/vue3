@@ -38,7 +38,6 @@ const Com=(Component)=>(
 
 export const formatRouter=(routerList=[])=>{
     const routes=[]
-    if(routerList.length==0)return false
     routerList.forEach((item)=>{
          const route={};
         if(item.element=="Layout"){
@@ -62,7 +61,7 @@ export const formatRouter=(routerList=[])=>{
 };
 export const useLazy=(routerList)=>{
     let temp=formatRouter(routerList);
-    console.log(...temp);
+    console.log(temp)
     router.push(...temp);
     router.push({
         path: '*',
@@ -74,4 +73,4 @@ export const Router=()=>{
     const routers= useRoutes(router)
     return routers
 }
- 
+

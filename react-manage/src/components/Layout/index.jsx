@@ -1,65 +1,128 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
+  GithubOutlined
 } from '@ant-design/icons';
-import { Layout, Button, theme,Typography} from 'antd';
+import { Layout, Button, theme, Typography, Badge } from 'antd';
 import SideMenu from './components/side_menu';
 import { Outlet } from 'react-router';
+
+import screenfull from 'screenfull'
 import "./components/head.less"
+import AvatarIcon from './components/AvatarIcon'
+import ThemeIcon from "./components/ThemeIcon"
+import logoImg from "@/assets/svg/logo.svg"
 const { Header, Sider, Content } = Layout;
-const { Text} = Typography;
+const { Text } = Typography;
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
-    token: { colorBgContainer },
+    token: { colorBgContainer,colorText },
   } = theme.useToken();
-  //   console.log(colorBgContainer)
+    console.log(theme.useToken().token)
+
+
+  const [fullScreen, setFullScreen] = useState(screenfull.isFullscreen)
+
+  useEffect(() => {
+    screenfull.on('change', () => {
+      if (screenfull.isFullscreen) {
+        setFullScreen(true)
+      } else {
+        setFullScreen(false)
+      }
+      return () => screenfull.off('change', () => { })
+    })
+  }, [])
+
+  const handleFullScreen = () => {
+    screenfull.toggle()
+  }
+  const jump = () => {
+    window.open('https://github.com/haojiey/react-mu-admin')
+  }
   return (
-   
+
     <Layout >
-       <Layout>
-       <Header
-    style={{
-      padding: 0,
-      background: colorBgContainer,
-    }}
-  >
-    <Button
-      type="text"
-      icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-      onClick={() => setCollapsed(!collapsed)}
-      style={{
-        fontSize: '16px',
-        width: 64,
-        height: 64,
-      }}
-    />
-  </Header>
-       </Layout >
-      
-      <Layout style={{height:'calc(100vh - 64px)'}}>
-      <Sider trigger={null} collapsible collapsed={collapsed} style={{
-        background: colorBgContainer,
-      }}>  
-        {/* <div className="demo-logo-vertical" ><Text>logo</Text></div> */}
-        <SideMenu ></SideMenu>
-         </Sider>
-      
-   
+      <Layout>
+        <Header
+          style={{
+            padding: 0,
+            background: colorBgContainer,
+          }}
+        >
+          <div className="left">
+            <img src={logoImg} alt=""className="logoImg"/>
+            <h2 className="logo-text" style={{color:colorText}}>Mu Admin</h2>
+          </div>
+          <div className="right">
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: '16px',
+                width: 64,
+                height: 64,
+              }}
+            />
+            <div className="toolbox">
+              <Badge size="small" count={5}>
+                <i className="iconfont icon-Bell font-black text-[20px]" style={{color:colorText}}/>
+              </Badge>
+             
+              <i
+                onClick={handleFullScreen}
+                style={{color:colorText}}
+                className={[
+                  'iconfont !text-[19px] font-black',
+                  fullScreen ? 'icon-a-FullscreenExit' : 'icon-Fullscreen'
+                ].join(' ')}
+
+              />
+              <ThemeIcon style={{color:colorText}}></ThemeIcon>
+              <GithubOutlined
+                title="Github"
+                style={{color:colorText}}
+                className="mx-[8px] flex cursor-pointer text-[20px] iconfont"
+                onClick={jump}
+              />
+              <div className="username text-[20px] mx-[8px] iconfont" style={{color:colorText}}>admin</div>
+              <AvatarIcon style={{color:colorText}}></AvatarIcon>
+            </div>
+          </div>
+        </Header>
+      </Layout >
+
+      <Layout style={{ height: 'calc(100vh - 64px)',overflow: 'hidden' }}>
+        <Sider trigger={null} collapsible collapsed={collapsed} style={{
+          background: colorBgContainer,
+        }}>
+          {/* <div className="demo-logo-vertical" ><Text>logo</Text></div> */}
+          <SideMenu ></SideMenu>
+        </Sider>
+
+
+        <div className="content-lay" style={{
+             overflowY:'scroll',
+             width:'100%',
+             display:"flex",
+             flexDirection:'column'
+        }}>
         <Content
           style={{
             margin: '16px',
             padding: 24,
-            minHeight:280,
+            flex:1,
+            minHeight: 280,
+            borderRadius:'10px',
             background: colorBgContainer,
           }}
         >
-          <Outlet/>
+          <Outlet />
         </Content>
+        </div>
       </Layout>
     </Layout>
   );

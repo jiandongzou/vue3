@@ -8,3 +8,43 @@
     color:@text-color;
     justify-content: center;
 }
+.ant-layout-header{
+    display: flex;
+    border-bottom: 1px solid #dfdfdf;
+    .left{
+        margin-left: 20px;
+        width:200px;
+        display: flex;
+        .logoImg{
+            width: 38px;
+        }
+        .logo-text{
+            margin-left: 5px;
+        }
+    }
+    .right{
+        flex:1;
+        margin-right: 20px;
+        display: flex;
+        justify-content: space-between;
+        .toolbox{
+            display: flex;
+            align-items: center;
+            .iconfont{
+                cursor: pointer;
+                font-size: 20px;
+                padding: 8px;
+                
+            }
+            .cursor-pointer{
+                cursor:pointer;
+            }
+            .username{
+                cursor:default;
+                font-size: 16px;
+            }
+        }
+
+    }
+   
+}

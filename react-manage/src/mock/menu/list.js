@@ -21,6 +21,19 @@ export default [
                 {
                     element: 'Layout',
                     children: [
+                        {
+                            icon: 'icon-clock',
+                            path: 'btnAuth',
+                            element: 'ButtonAuth/index',
+                            meta: {
+                                title: '按钮权限'
+                            }
+                        }
+                    ]
+                },
+                {
+                    element: 'Layout',
+                    children: [
                            {
                             icon: 'icon-cry',
                             path: 'error',
@@ -47,9 +60,21 @@ export default [
                             ]
                         }
                     ]
+                },
+                {
+                    element: 'Layout',
+                    children: [
+                        {
+                            icon: 'icon-category',
+                            path: 'about',
+                            element: 'about/index',
+                            meta: {
+                                title: '关于信息',
+                                auth: true
+                            }
+                        }
+                    ]
                 }
-               
-               
             ]
 
             return {

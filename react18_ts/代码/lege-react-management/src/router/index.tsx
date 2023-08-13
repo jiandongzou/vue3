@@ -1,4 +1,4 @@
-import React,{ lazy } from "react"
+import React,{ lazy,Suspense } from "react"
 // Navigate重定向组件
 import {Navigate} from "react-router-dom"
 
@@ -17,9 +17,9 @@ const Page301 = lazy(()=>import("../views/Page301"))
 
 
 const withLoadingComponent = (comp:JSX.Element) => (
-  <React.Suspense fallback={<div>Loading...</div>}>
+  <Suspense fallback={<div>Loading...</div>}>
     {comp}
-  </React.Suspense>
+  </Suspense>
 )
 
 const routes = [
