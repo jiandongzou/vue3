@@ -19,7 +19,7 @@ const reducer=combineReducers({
 const persistConfig = {
      key: 'root',// 标识存储在本地存储中的数据
     storage, //持久化存储引擎，默认是localStorage
-    whitelist: ['user'],//白名单
+    whitelist: ['user','theme'],//白名单
     blacklist: ['counter'],//黑名单
  }; 
 // 创建持久化reducer 

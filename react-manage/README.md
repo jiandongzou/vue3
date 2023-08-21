@@ -12,4 +12,5 @@ Currently, two official plugins are available:
 在node_modules\vite-plugin-mock\dist\index.mjs文件中添加以下代码
 
 import { createRequire } from 'module'
+
 const require = createRequire(import.meta.url)

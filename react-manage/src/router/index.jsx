@@ -44,9 +44,7 @@ export const formatRouter=(routerList=[])=>{
             route.element=<LayoutIndex />;
         }else{
             const URL = `/src/page/${item.element}.jsx`
-            const module=LazyLoad(lazy(viteModule[URL]));
-            //alert(item.meta.auth)
-           
+            const module=viteModule[URL]?LazyLoad(lazy(viteModule[URL])):LazyLoad(lazy(viteModule['/src/page/error/404/index.jsx']));
             const el=item.meta?.auth ? <Auth>{module}</Auth> : module
             route.element=item.element ? el : null;
             route.path=item.path;

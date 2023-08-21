@@ -42,9 +42,9 @@ const btnAuthlist = (key) => {
 
 export default [
     {
-        url: '/api/system/users',
+        url: '/api/users',
         method: 'post',
-        timeout: 500,
+        timeout: 5000,
         response: () => ({
             code: 200,
             message: 'ok',
@@ -52,7 +52,7 @@ export default [
         })
     },
     {
-        url: '/api/system/notifys',
+        url: '/api/notifys',
         method: 'post',
         timeout: 500,
         response: () => ({
@@ -62,7 +62,7 @@ export default [
         })
     },
     {
-        url: '/api/menu/btnAuthList',
+        url: '/api/btnAuthList',
         method: 'post',
         timeout: 500,
         response: ({ body }) => ({

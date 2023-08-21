@@ -9,7 +9,7 @@ export function getMenuList() {
 
 export function getMenuBtnAuthList(params) {
     return defaultRequest.request({
-        url: '/menu/btnAuthList',
+        url: '/api/btnAuthList',
         method: 'post',
         data: params
     })

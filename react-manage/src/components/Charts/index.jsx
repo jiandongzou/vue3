@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef,memo } from 'react'
 import * as echarts from 'echarts'
 import './index.less'
 import Empty from '../Empty'
@@ -24,4 +24,4 @@ const Charts = ({ options, empty = false }) => {
     return <>{empty ? <Empty /> : <div ref={echartsRef} className="w-full h-full" ></div>}</>
 }
 
-export default Charts
+export default memo(Charts)

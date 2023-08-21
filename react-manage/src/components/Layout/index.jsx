@@ -10,8 +10,10 @@ import { Outlet } from 'react-router';
 
 import screenfull from 'screenfull'
 import "./components/head.less"
+import './index.less'
 import AvatarIcon from './components/AvatarIcon'
 import ThemeIcon from "./components/ThemeIcon"
+import Watermark from "../Watermark/index"
 import logoImg from "@/assets/svg/logo.svg"
 const { Header, Sider, Content } = Layout;
 const { Text } = Typography;
@@ -108,19 +110,23 @@ const App = () => {
              overflowY:'scroll',
              width:'100%',
              display:"flex",
-             flexDirection:'column'
+             alignItems:'stretch',
+             flexDirection:'column',
         }}>
         <Content
           style={{
             margin: '16px',
             padding: 24,
-            flex:1,
-            minHeight: 280,
+           
             borderRadius:'10px',
             background: colorBgContainer,
           }}
         >
-          <Outlet />
+          
+          <Watermark >
+            
+          </Watermark>
+         
         </Content>
         </div>
       </Layout>
