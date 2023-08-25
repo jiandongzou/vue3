@@ -11,7 +11,7 @@ function nameb(obj:{name:string,age:number}){
     age?:number
   }
   function namec(obj:objType){
-    console.log(`我叫${obj.name},今年${obj.age?obj.age:18}`)
+    console.log(`我叫${obj.name},今年${obj.age?obj.age:18}岁`)
   };
   namec({name:'mike',age:29})
   let ro: ReadonlyArray<number> = [1];
