@@ -1,0 +1,6 @@
+{
+    "auto-close-tag.disableOnLanguage": [],
+    "editor.codeActionsOnSave": {},
+    "workbench.colorCustomizations": {},
+    "css.lint.unknownAtRules": "ignore"
+}

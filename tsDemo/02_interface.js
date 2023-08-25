@@ -19,5 +19,3 @@ class Car {
         console.log('Car alert');
     }
 }
-
-
